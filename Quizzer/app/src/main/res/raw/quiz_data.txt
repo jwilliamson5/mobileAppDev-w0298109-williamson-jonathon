@@ -1,0 +1,10 @@
+Term 1<*SPLIT*>Definition 1
+Term 2<*SPLIT*>Definition 2
+Term 3<*SPLIT*>Definition 3
+Term 4<*SPLIT*>Definition 4
+Term 5<*SPLIT*>Definition 5
+Term 6<*SPLIT*>Definition 6
+Term 7<*SPLIT*>Definition 7
+Term 8<*SPLIT*>Definition 8
+Term 9<*SPLIT*>Definition 9
+Term 10<*SPLIT*>Definition 10

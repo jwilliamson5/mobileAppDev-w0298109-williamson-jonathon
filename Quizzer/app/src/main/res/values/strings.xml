@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Quizzer</string>
+    <string name="enter_name">Please enter your name:</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="please_choose_one">Please choose one:</string>
+    <string name="next">Next Question</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect.</string>
+    <string name="final_score">%1$s, you scored %2$s/%3$s</string>
+    <string name="try_again">Try again</string>
+    <string name="change_name">Change name</string>
+    <string name="finish">Finish</string>
+</resources>

@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="com.assignment2.jwilliamson.quizzer.Quiz">
 
     <GridLayout
@@ -13,83 +13,105 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/definition_TV"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_columnSpan="2"
-            android:layout_row="1"
-            android:layout_weight="1"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/quiz_TV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_columnSpan="2"
-                android:layout_weight="1"
-                android:text="@string/please_choose_one"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-            <RadioGroup
-                android:id="@+id/rg"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_above="@+id/selectionGroup"
+                android:layout_alignParentTop="true"
+                android:layout_column="0"
+                android:layout_columnSpan="2">
 
-                <RadioButton
-                    android:id="@+id/answer1_RB"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/definition_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/selectionGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/nextQuestion_btn"
+                android:layout_alignParentBottom="false"
+                android:layout_gravity="center_vertical"
+                android:layout_rowWeight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/quiz_TV"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_columnSpan="2"
                     android:layout_weight="1"
-                    android:text="RadioButton" />
+                    android:text="@string/please_choose_one"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp" />
 
-                <RadioButton
-                    android:id="@+id/answer2_RB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RadioButton" />
+                <RadioGroup
+                    android:id="@+id/rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <RadioButton
-                    android:id="@+id/answer3_RB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RadioButton" />
+                    <RadioButton
+                        android:id="@+id/answer1_RB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RadioButton" />
 
-                <RadioButton
-                    android:id="@+id/answer4_RB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RadioButton" />
+                    <RadioButton
+                        android:id="@+id/answer2_RB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RadioButton" />
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/answer3_RB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RadioButton" />
 
-        </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/answer4_RB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RadioButton" />
 
-        <Button
-            android:id="@+id/nextQuestion_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_weight="1"
-            android:text="@string/next"
-            tools:layout_editor_absoluteX="-661dp"
-            tools:layout_editor_absoluteY="666dp" />
+                </RadioGroup>
 
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/nextQuestion_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_column="0"
+                android:layout_weight="1"
+                android:text="@string/next"
+                tools:layout_editor_absoluteX="-661dp"
+                tools:layout_editor_absoluteY="666dp" />
+        </RelativeLayout>
     </GridLayout>
 
 </android.support.constraint.ConstraintLayout>

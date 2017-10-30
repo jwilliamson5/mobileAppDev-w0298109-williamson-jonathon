@@ -1,10 +1,10 @@
-Term 1<*SPLIT*>Definition 1
-Term 2<*SPLIT*>Definition 2
-Term 3<*SPLIT*>Definition 3
-Term 4<*SPLIT*>Definition 4
-Term 5<*SPLIT*>Definition 5
-Term 6<*SPLIT*>Definition 6
-Term 7<*SPLIT*>Definition 7
-Term 8<*SPLIT*>Definition 8
-Term 9<*SPLIT*>Definition 9
-Term 10<*SPLIT*>Definition 10
+Activity<*SPLIT*>This represents a single screen with a user interface
+App<*SPLIT*>The library where components such as Activity and AlertDialog are defined
+Application Components<*SPLIT*>These are the essential building blocks of an Android application. Each is a different point through which the system can enter your application. Not all are actual entry points for the user and some depend on each other, but each one exists as its own entity and plays a specific role.
+Android application package file<*SPLIT*>Each Android application is compiled and packaged in a single file that includes all of the application's code (.dex files), resources, assets, and manifest file. This may have any name but must use the .apk extension.
+Android operating system<*SPLIT*>This locates an appropriate component to respond to the intent, launches a new instance of the component if one is needed, and passes it the Intent object.
+Anonymous inner<*SPLIT*>In object-oriented programming (OOP), this is an un-named class declared entirely within the body of another class or interface. Often use for UI event handling.
+Broadcast receiver<*SPLIT*>These are components that respond to system-wide broadcast announcements. Although these don't display a user interface, they may create a status bar notification to alert the user when a broadcast event occurs. More commonly, though, they act as just a "gateway" to other components and are intended to do a very minimal amount of work.
+Content provider<*SPLIT*>This supplies structured access to data managed by the application.
+Hash table / hash map<*SPLIT*>This is a data structure that maps identifying values, known as keys, to associated values.
+Intent<*SPLIT*>You can use these to start activities, services, and broadcast receivers.

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +15,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +30,6 @@ public class Quiz extends AppCompatActivity {
     private ArrayList<RadioButton> radioButtons = new ArrayList<>();
     private Map<String, String> termMap = new HashMap<>();
     private ArrayList<String> usedTerms = new ArrayList<>();
-    private final String delimiter = "<\\*SPLIT\\*>";
     private RadioButton answerButton;
     private Button nextQuestion_btn;
     private int score = 0;
@@ -73,13 +73,13 @@ public class Quiz extends AppCompatActivity {
         }
 
         try {
-            BufferedReader bf = new BufferedReader(new InputStreamReader(this.getResources().openRawResource(R.raw.quiz_data)));
-            String[] dLine;
-            while(bf.ready()) {
-                dLine = bf.readLine().split(delimiter);
-                termMap.put(dLine[0], dLine[1]);
+            JsonReader reader = new JsonReader(new InputStreamReader(this.getResources().openRawResource(R.raw.quiz_data)));
+            reader.beginObject();
+            while(reader.hasNext()) {
+                termMap.put(reader.nextName(), reader.nextString());
             }
             usedTerms.addAll(termMap.keySet());
+            reader.endObject();
         } catch (Exception e) {
             Log.d("OnCreate File Read", "Error reading file: ", e);
         }

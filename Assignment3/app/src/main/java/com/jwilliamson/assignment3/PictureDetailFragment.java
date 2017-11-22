@@ -3,10 +3,12 @@ package com.jwilliamson.assignment3;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +71,12 @@ public class PictureDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((ImageView) rootView.findViewById(R.id.picture_detail)).setImageResource(Integer.parseInt(mItem.id));
+            try {
+                ImageView iv = ((ImageView) rootView.findViewById(R.id.picture_detail));
+                iv.setImageDrawable(Drawable.createFromStream(getActivity().getAssets().open(mItem.path), null));
+            } catch (Exception e) {
+                Log.e("Fragment Error", e.toString());
+            }
         }
 
         return rootView;

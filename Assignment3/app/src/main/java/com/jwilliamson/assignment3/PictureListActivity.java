@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,14 @@ public class PictureListActivity extends AppCompatActivity {
         gson = new Gson();
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         SharedPreferences.Editor editor = prefs.edit();
-        Picture pic1 = new Picture(String.valueOf(R.drawable.a), getResources().getResourceName(R.drawable.a), getResources().getResourceName(R.drawable.a));
-        editor.putString("1", gson.toJson(pic1));
-        Picture pic2 = new Picture(String.valueOf(R.drawable.b), getResources().getResourceName(R.drawable.b), getResources().getResourceName(R.drawable.b));
-        editor.putString("2", gson.toJson(pic2));
+        try {
+            String[] assetFiles = getAssets().list("pictures");
+            for(int i = 0; i < assetFiles.length; i++) {
+                editor.putString(String.valueOf(i), gson.toJson(new Picture(String.valueOf(i), assetFiles[i], "pictures/" + assetFiles[i])));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         editor.commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -88,11 +93,11 @@ public class PictureListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         List<Picture> pictures = new ArrayList<>();
-
-        for(int i = 0; i <= prefs.getAll().size(); i++) {
-            if(prefs.contains(String.valueOf(i))) {
-                Picture pic = gson.fromJson(prefs.getString(String.valueOf(i), ""), Picture.class);
-                pictures.add(pic);
+        for(Map.Entry<String, ?> entry : prefs.getAll().entrySet()) {
+            try {
+                pictures.add(gson.fromJson((String) entry.getValue(), Picture.class));
+            } catch (Exception e) {
+                Log.e("SetupRecyclerView Error", e.toString());
             }
         }
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(pictures));

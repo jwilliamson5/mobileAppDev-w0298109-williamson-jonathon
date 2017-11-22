@@ -54,16 +54,19 @@ public class PictureListActivity extends AppCompatActivity {
 
         gson = new Gson();
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        try {
-            String[] assetFiles = getAssets().list("pictures");
-            for(int i = 0; i < assetFiles.length; i++) {
-                editor.putString(String.valueOf(i), gson.toJson(new Picture(String.valueOf(i), assetFiles[i], "pictures/" + assetFiles[i])));
+        final SharedPreferences.Editor editor = prefs.edit();
+        if(!prefs.getBoolean("listIsSet", false)) {
+            try {
+                String[] assetFiles = getAssets().list("pictures");
+                for(int i = 0; i < assetFiles.length; i++) {
+                    editor.putString(String.valueOf(i), gson.toJson(new Picture(String.valueOf(i), assetFiles[i], "pictures/" + assetFiles[i])));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            editor.putBoolean("listIsSet", true);
+            editor.commit();
         }
-        editor.commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,8 +76,10 @@ public class PictureListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                editor.clear();
+                editor.commit();
+                Toast.makeText(getBaseContext(), R.string.clearedSharedPreferences, Toast.LENGTH_SHORT).show();
+                recreate();
             }
         });
 
@@ -124,11 +129,22 @@ public class PictureListActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).name);
+            if(holder.mItem.islocked) {
+                holder.mView.setBackgroundColor(getResources().getColor(R.color.colorDisabled));
+            }
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences.Editor editor = prefs.edit();
+                    if(holder.mItem.islocked) {
+                        return;
+                    } else {
+                        holder.mItem.islocked = true;
+                        holder.mView.setBackgroundColor(getResources().getColor(R.color.colorDisabled));
+                        editor.putString(holder.mItem.id, gson.toJson(holder.mItem));
+                        editor.commit();
+                    }
                     editor.putString("selection", holder.mItem.id);
                     editor.apply();
                     if (mTwoPane) {

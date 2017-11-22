@@ -5,6 +5,7 @@ public class Picture {
     public final String id;
     public final String name;
     public final String path;
+    public boolean islocked = false;
 
     public Picture(String id, String name, String path) {
         this.id = id;

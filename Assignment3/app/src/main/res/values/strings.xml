@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Assignment 3</string>
     <string name="title_picture_detail">Picture Detail</string>
+    <string name="clearedSharedPreferences">Cleared shared preferences</string>
 </resources>
